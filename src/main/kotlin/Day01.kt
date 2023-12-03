@@ -3,7 +3,8 @@ import java.lang.StringBuilder
 
 fun main() {
 
-    val path = "..."
+    val path = "src/main/kotlin/inputs/Day01.txt"
+    val file = File(path).absoluteFile
     val numbers = mapOf(
         "one" to 1,
         "two" to 2,
@@ -17,7 +18,7 @@ fun main() {
     )
 
     fun part1(): Int = buildList {
-        File(path).forEachLine { line ->
+        file.forEachLine { line ->
             line.filter { it.isDigit() }.apply {
                 add("${first()}${last()}".toInt())
             }
@@ -26,7 +27,7 @@ fun main() {
 
 
     fun part2(): Int = buildList {
-        File(path).forEachLine { line ->
+        file.forEachLine { line ->
             val firstValues = StringBuilder()
             val lastValues = StringBuilder()
 

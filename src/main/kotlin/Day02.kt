@@ -1,9 +1,8 @@
 import java.io.File
 
-
-
 fun main() {
-    val path = "..."
+    val path = "src/main/kotlin/inputs/Day01.txt"
+    val file = File(path).absoluteFile
     val minimumValues = mutableMapOf(
         "red" to 0,
         "green" to 0,
@@ -28,7 +27,7 @@ fun main() {
     fun part1(): Int {
         var point = 0
 
-        File(path).forEachLine { line ->
+        file.forEachLine { line ->
             var eliminated = false
             val gameId = line.substringBefore(':').takeLastWhile { it.isDigit() }.toInt()
 
@@ -44,7 +43,7 @@ fun main() {
     fun part2(): Int {
         var point = 0
 
-        File(path).forEachLine { line ->
+        file.forEachLine { line ->
 
             line.withGameInfo {
                 if (it.first().toInt() > minimumValues[it.last()]!!) {

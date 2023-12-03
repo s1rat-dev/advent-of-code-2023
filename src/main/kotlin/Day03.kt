@@ -1,10 +1,10 @@
 import java.io.File
 
 fun main() {
-    val path = "..."
+    val path = "src/main/kotlin/inputs/Day01.txt"
+    val file = File(path).absoluteFile.readLines()
     val specialChars = listOf('#', '*', '@', '+', '-', '%', '&', '/', '$', '=')
     val multiply = '*'
-    val file = File(path).readLines()
 
     fun getNumber(file: String, index: Int): Int {
         val prefix = file.substring(0, index).takeLastWhile { it.isDigit() }
