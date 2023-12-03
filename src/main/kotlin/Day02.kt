@@ -1,7 +1,7 @@
 import java.io.File
 
 fun main() {
-    val path = "src/main/kotlin/inputs/Day01.txt"
+    val path = "src/main/kotlin/inputs/Day02.txt"
     val file = File(path).absoluteFile
     val minimumValues = mutableMapOf(
         "red" to 0,
