@@ -29,7 +29,7 @@ fun main() {
                     if (size == this.size) add(first to last)
                 }
             }.toMutableList()
-        }.minBy { it.first }.first
+        }.minOf { it.first }
 
 
     fun part1(): Long = seeds.map { it to it + 1 }.toMutableList().getMinimumLocation()
