@@ -14,45 +14,33 @@ fun main() {
         }
     }.toMap()
 
-
-    fun part1(): Int {
+    fun String.getLocationCount(body: (location: String) -> Boolean): Int {
+        var location = this
         var count = 0
-        var location = "AAA"
         var navigateCopy = navigates.toMutableList()
+
         while (navigateCopy.size > 0) {
             val route = navigateCopy.removeFirst()
             location = map[location]!![route]
-            if (navigateCopy.size == 0 && location != "ZZZ")
+            if (navigateCopy.size == 0 && body.invoke(location))
                 navigateCopy = navigates.toMutableList()
 
             count++
         }
-
         return count
     }
 
+    fun part1(): Int = "AAA".getLocationCount { location -> location != "ZZZ" }
+
     fun part2(): BigDecimal {
-        var counts: MutableList<BigDecimal> = mutableListOf()
         val locations = map.keys.filter { it.last() == 'A' }
 
-        locations.forEach {
-            var location = it
-            var count = 0
-            var navigateCopy = navigates.toMutableList()
-
-            while (navigateCopy.size > 0) {
-                val route = navigateCopy.removeFirst()
-                location = map[location]!![route]
-                if (navigateCopy.size == 0 && location.last() != 'Z')
-                    navigateCopy = navigates.toMutableList()
-
-                count++
-            }
-            counts.add(BigDecimal(count))
-        }
+        var counts = locations.map {
+            BigDecimal(it.getLocationCount { location -> location.last() != 'Z' })
+        }.toMutableList()
 
         var currentSize = 0
-        while(counts.size != currentSize) {
+        while (counts.size != currentSize) {
             currentSize = counts.size
             Util.findTriples(counts).forEach {
                 counts = (counts - listOf(it.first, it.second)).toMutableList()
